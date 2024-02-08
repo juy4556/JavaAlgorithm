@@ -14,6 +14,8 @@ public class 빙산_2573 {
     static int[][] melting;
     static int[][] dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
     static int year = 0;
+    static List<int[]> icebergs = new ArrayList<>(10000);
+    static int connectCount = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -22,7 +24,6 @@ public class 빙산_2573 {
         M = Integer.parseInt(st.nextToken());
         space = new int[N][M];
         visited = new int[N][M];
-        List<int[]> icebergs = new ArrayList<>(10000);
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < M; j++) {
@@ -61,13 +62,40 @@ public class 빙산_2573 {
                 }
             }
             if (icebergSize == 0) {
-                System.out.println(0);
-                return;
+                break;
             }
+            year++;
             visited = new int[N][M];
             int[] iceberg = icebergs.get(0);
-            dfs(iceberg, visited);
-            year++;
+            visited[iceberg[0]][iceberg[1]] = 1;
+            connectCount = 1;
+            dfs(iceberg, visited, icebergSize);
+            if (connectCount != icebergSize) {
+                break;
+            }
         }
+        if (icebergs.size() == 0) {
+            year = 0;
+        }
+        System.out.println(year);
+    }
+
+    private static boolean dfs(int[] iceberg, int[][] visited, int goal) {
+        if (connectCount == goal) {
+            return true;
+        }
+        int x = iceberg[0];
+        int y = iceberg[1];
+        for (int d = 0; d < 4; d++) {
+            int nx = x + dir[d][0];
+            int ny = y + dir[d][1];
+            if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
+            if (space[nx][ny] > 0 && visited[nx][ny] == 0) {
+                connectCount++;
+                visited[nx][ny] = 1;
+                dfs(new int[]{nx, ny}, visited, goal);
+            }
+        }
+        return false;
     }
 }
