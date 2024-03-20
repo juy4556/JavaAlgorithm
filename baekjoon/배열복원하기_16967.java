@@ -22,10 +22,20 @@ public class 배열복원하기_16967 {
                 B[i][j] = Integer.parseInt(st.nextToken());
             }
         }
-        
-        for (int i = 0; i < H; i++) {
+        for (int i = 0; i < X; i++) {
             for (int j = 0; j < W; j++) {
-
+                A[i][j] = B[i][j];
+            }
+        }
+        for (int i = X; i < H; i++) {
+            for (int j = 0; j < Y; j++) {
+                A[i][j] = B[i][j];
+            }
+        }
+        for (int i = X; i < H; i++) {
+            for (int j = Y; j < W; j++) {
+                B[i][j] -= A[i - X][j - Y];
+                A[i][j] = B[i][j];
             }
         }
 
