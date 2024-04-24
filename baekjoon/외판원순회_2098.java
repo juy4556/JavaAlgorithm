@@ -33,8 +33,6 @@ public class 외판원순회_2098 {
     }
 
     public static int dfs(int cur, int visited) {
-        count++;
-        System.out.println(count);
         if (visited == (1 << N) - 1) {
             if (W[cur][0] == 0) return MAX;  // 길 없음
             return W[cur][0];

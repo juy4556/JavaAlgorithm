@@ -86,7 +86,6 @@ public class SortPractice {
 
         // ArrayList -> Stream
         List<String> strList1 = new ArrayList<>(Arrays.asList("i", "am", "so", "happy"));
-
         Stream<String> sortedStrStream1 = strList1.stream().sorted();
         List<String> newStrList1 = sortedStrStream1.collect(Collectors.toList());
         System.out.println(newStrList1);

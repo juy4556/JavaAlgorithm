@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Solution {
+public class Solution3 {
 
     public static int solution(String s) {
         int count = 0;
